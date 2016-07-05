@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>#forkbombers</title>
-    <link>http://www.forkbombers.com/</link>
-    <description>Recent content on #forkbombers</description>
+    <title>Sqlmap on #forkbombers</title>
+    <link>http://www.forkbombers.com/tags/sqlmap.html</link>
+    <description>Recent content in Sqlmap on #forkbombers</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 04 Jul 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://www.forkbombers.com/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://www.forkbombers.com/tags/sqlmap.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>SQLMap Tamper Scripts Update</title>
@@ -556,20 +556,6 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Data Protection Flash Cards</title>
-      <link>http://www.forkbombers.com/2015/05/sqlmap-tool.html</link>
-      <pubDate>Thu, 07 May 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.forkbombers.com/2015/05/sqlmap-tool.html</guid>
-      <description>&lt;p&gt;Over at Designing for Privacy they&amp;rsquo;ve come up with a fantastic new way of raising data protection issues in the design process.&lt;/p&gt;
-
-&lt;p&gt;They&amp;rsquo;ve come up with a set of flash cards which are split into four categories (constraints / regulation / system / users) which can be used to conceptualize the legal, moral and ethical responsibilities of parties during the design process.&lt;/p&gt;
-
-&lt;p&gt;To take a look head on over to &lt;a href=&#34;http://www.designingforprivacy.co.uk&#34;&gt;www.designingforprivacy.co.uk&lt;/a&gt; where you can also find the downloadable versions to print.&lt;/p&gt;
 </description>
     </item>
     

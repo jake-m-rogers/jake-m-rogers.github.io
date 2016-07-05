@@ -2,3 +2,12 @@ baseurl = "http://www.forkbombers.com/"
 languageCode = "en-us"
 title = "#forkbombers"
 theme = "base16"
+uglyurls = true
+
+[Params]
+  Author = "Jake Rogers"
+  disqusShortname = "jakerogers"
+
+[permalinks]
+    post = "/:year/:month/:filename.html"
+    code = "/:filename.html"
