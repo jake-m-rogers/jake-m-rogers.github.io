@@ -1,0 +1,53 @@
+{{ $baseurl := .Site.BaseURL }}{{ $dateMissing := eq .Date.Year 1}}
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+{{ if eq $dateMissing false }}
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 02, 2006" }}</time></span>
+{{ end }}
+{{ with .Params.categories }}
+    <span class="key">{{ if eq $dateMissing true }}published {{ end }}in</span>
+    <span class="val">
+{{ range . }}
+        <a href="{{ $baseurl }}categories/{{ . | urlize }}">{{ . }}</a>
+{{ end }}
+    </span>
+{{ end }}
+{{ with .Params.tags }}
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+{{ range . }}
+        <a href="{{ $baseurl }}tags/{{ . | urlize }}">{{ . }}</a>
+{{ end }}
+    </span>
+{{ end }}
+  </div>
+  <h1 class="headline" itemprop="headline">{{ .Title }}</h1>
+  <section class="body" itemprop="articleBody">
+    {{ .Content }}
+
+	<br /><br /><br />
+	<div id="disqus_thread"></div>
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+         */
+		 
+        var disqus_config = function () {
+            this.page.url = '{{ .Site.BaseURL }}';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = '{{ .RelPermalink }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() {  // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = '//forkbomberscom.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <script id="dsq-count-scr" src="//forkbomberscom.disqus.com/count.js" async></script>
+  </section>
+
+</article>
