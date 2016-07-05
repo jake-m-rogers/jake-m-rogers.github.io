@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+<meta name="generator" content="Hugo 0.17-DEV" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.forkbombers.com/css/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type="text/css">
+<link rel="alternate" href="http://www.forkbombers.com/index.xml" type="application/rss+xml" title="#forkbombers">
+<title>Posts - #forkbombers</title>
+</head>
+<body>
+
+<header>
+  <div class="container clearfix">
+    <a class="path" href="http://www.forkbombers.com/">[#forkbombers]</a>
+    <span class="caret"># _</span>
+    <div class="right">
+      
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+<main role="main" class="article-list">
+  <h1 class="list-title">Posts</h1>
+  
+    
+<article class="list-item" itemscope itemtype="http://schema.org/Blog">
+  <h2 class="headline" itemprop="headline"><a href="/2016/07/sqlmap-tamper-scripts-update.html">SQLMap Tamper Scripts Update</a></h2>
+  <div class="meta">
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2016-07-04">July 04, 2016</time></span>
+
+  </div>
+  <section class="summary">
+    So my last post from three years ago was pretty well received, with the rate at which SQLMap is developed it is definitely behind.r, Here&rsquo;s an updated graph of all tamper scripts included with the latest version (as of time of writing, 04/July/2016). I will be putting something together, possibly as a commit to the SQLMap project to aid with these. Will update once done so stay tuned. Name Description Example apostrophemask.py Replaces apostrophe character with its UTF-8 full width counterpart &lsquo;1 AND %EF%BC%871%EF%BC%87=%EF%BC%871&rsquo; apostrophenullencode.py Replaces apostrophe character with its illegal double unicode counterpart &lsquo;1 AND %271%27=%271&rsquo; appendnullbyte.py Appends encoded NULL byte character at the end of payload &lsquo;1 AND 1=1&rsquo; base64encode.py Base64 all characters in a given payload &lsquo;MScgQU5EIFNMRUVQKDUpIw==&rsquo; between.py Replaces greater than operator (&lsquo;&gt;&rsquo;) with &lsquo;NOT BETWEEN 0 AND #&rsquo; &lsquo;1 AND A NOT BETWEEN 0 AND B&ndash;&rsquo; bluecoat.py Replaces space character after SQL statement with a valid random blank character.Afterwards replace character = with LIKE operator &lsquo;SELECT%09id FROM users where id LIKE 1&rsquo; chardoubleencode.py Double url-encodes all characters in a given payload (not processing already encoded) &rsquo;%2553%2545%254C%2545%2543%2554%2520%2546%2549%2545%254C%2544%2520%2546%2552%254F%254D%2520%2554%2541%2542%254C%2545&rsquo; commalesslimit.py Replaces instances like &lsquo;LIMIT M, N&rsquo; with &lsquo;LIMIT N OFFSET M&rsquo; &ldquo;LIMIT 3 OFFSET 2&rdquo; commalessmid.py Replaces instances like &lsquo;MID(A, B, C)&rsquo; with &lsquo;MID(A FROM B FOR C)&rsquo; &lsquo;MID(VERSION() FROM 1 FOR 1)&rsquo; concat2concatws.py Replaces instances like &lsquo;CONCAT(A, B)&rsquo; with &lsquo;CONCAT_WS(MID(CHAR(0), 0, 0), A, B)&rsquo; &lsquo;CONCAT_WS(MID(CHAR(0),0,0),1,2)&rsquo; charencode.py Url-encodes all characters in a given payload (not processing already encoded) &rsquo;%53%45%4C%45%43%54%20%46%49%45%4C%44%20%46%52%4F%4D%20%54%41%42%4C%45&rsquo; charunicodeencode.py Unicode-url-encodes non-encoded characters in a given payload (not processing already encoded) &rsquo;%u0053%u0045%u004C%u0045%u0043%u0054%u0020%u0046%u0049%u0045%u004C%u0044%u0020%u0046%u0052%u004F%u004D%u0020%u0054%u0041%u0042%u004C%u0045&rsquo; equaltolike.py Replaces all occurances of operator equal (&lsquo;=&rsquo;) with operator &lsquo;LIKE&rsquo; &lsquo;SELECT * FROM users WHERE id LIKE 1&rsquo; escapequotes.py Slash escape quotes (&rsquo; and &ldquo;) &lsquo;1\\&rdquo; AND SLEEP(5)#&rsquo; greatest.py Replaces greater than operator (&lsquo;&gt;&rsquo;) with &lsquo;GREATEST&rsquo; counterpart &lsquo;1 AND GREATEST(A,B+1)=A&rsquo; halfversionedmorekeywords.py Adds versioned MySQL comment before each keyword &ldquo;value&rsquo;/!0UNION/!0ALL/!0SELECT/!0CONCAT(/!0CHAR(58,107,112,113,58),/!0IFNULL(CAST(/!0CURRENT_USER()/!0AS/!0CHAR),/!0CHAR(32)),/!0CHAR(58,97,110,121,58)),/!0NULL,/!0NULL#/!0AND &lsquo;QDWa&rsquo;=&lsquo;QDWa&rdquo; ifnull2ifisnull.py Replaces instances like &lsquo;IFNULL(A, B)&rsquo; with &lsquo;IF(ISNULL(A), B, A)&rsquo; &lsquo;IF(ISNULL(1),2,1)&rsquo; modsecurityversioned.py Embraces complete query with versioned comment &lsquo;1 /!30874AND 2&gt;1/&ndash;&rsquo; modsecurityzeroversioned.py Embraces complete query with zero-versioned comment &lsquo;1 /!00000AND 2&gt;1/&ndash;&rsquo; multiplespaces.py Adds multiple spaces around SQL keywords &lsquo;1 UNION SELECT foobar&rsquo; nonrecursivereplacement.py Replaces predefined SQL keywords with representations suitable for replacement (e.g.  <a href="/2016/07/sqlmap-tamper-scripts-update.html">Read More...</a>
+  </section>
+</article>
+
+  
+    
+<article class="list-item" itemscope itemtype="http://schema.org/Blog">
+  <h2 class="headline" itemprop="headline"><a href="/2015/05/sqlmap-tamper-scripts.html">SQLMap&#39;s Tamper Scripts</a></h2>
+  <div class="meta">
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2015-05-15">May 15, 2015</time></span>
+
+  </div>
+  <section class="summary">
+    THIS POST IS OUTDATED, PLEASE SEE LATEST VERSION HERE I&rsquo;ve been playing with SQLMap a lot recently to automate all sorts of injections, something which isn&rsquo;t so well documented is the tamper scripts which come with it. Here&rsquo;s a graph with short explanations of what each does, maybe someone will find it useful. Name Description Example apostrophemask.py Replaces apostrophe character with its UTF-8 full width counterpart &lsquo;1 AND %EF%BC%871%EF%BC%87=%EF%BC%871&rsquo; apostrophenullencode.py Replaces apostrophe character with its illegal double unicode counterpart &lsquo;1 AND %271%27=%271&rsquo; appendnullbyte.py Appends encoded NULL byte character at the end of payload &lsquo;1 AND 1=1&rsquo; base64encode.py Base64 all characters in a given payload &lsquo;MScgQU5EIFNMRUVQKDUpIw==&rsquo; between.py Replaces greater than operator (&lsquo;&gt;&rsquo;) with &lsquo;NOT BETWEEN 0 AND #&rsquo; &lsquo;1 AND A NOT BETWEEN 0 AND B&ndash;&rsquo; bluecoat.py Replaces space character after SQL statement with a valid random blank character.Afterwards replace character = with LIKE operator &lsquo;SELECT%09id FROM users where id LIKE 1&rsquo; chardoubleencode.py Double url-encodes all characters in a given payload (not processing already encoded) &rsquo;%2553%2545%254C%2545%2543%2554%2520%2546%2549%2545%254C%2544%2520%2546%2552%254F%254D%2520%2554%2541%2542%254C%2545&rsquo; charencode.py Url-encodes all characters in a given payload (not processing already encoded) &rsquo;%53%45%4C%45%43%54%20%46%49%45%4C%44%20%46%52%4F%4D%20%54%41%42%4C%45&rsquo; charunicodeencode.py Unicode-url-encodes non-encoded characters in a given payload (not processing already encoded) &rsquo;%u0053%u0045%u004C%u0045%u0043%u0054%u0020%u0046%u0049%u0045%u004C%u0044%u0020%u0046%u0052%u004F%u004D%u0020%u0054%u0041%u0042%u004C%u0045&rsquo; equaltolike.py Replaces all occurances of operator equal (&lsquo;=&rsquo;) with operator &lsquo;LIKE&rsquo; &lsquo;SELECT * FROM users WHERE id LIKE 1&rsquo; greatest.py Replaces greater than operator (&lsquo;&gt;&rsquo;) with &lsquo;GREATEST&rsquo; counterpart &lsquo;1 AND GREATEST(A,B+1)=A&rsquo; halfversionedmorekeywords.py Adds versioned MySQL comment before each keyword &ldquo;value&rsquo;/!0UNION/!0ALL/!0SELECT/!0CONCAT(/!0CHAR(58,107,112,113,58),/!0IFNULL(CAST(/!0CURRENT_USER()/!0AS/!0CHAR),/!0CHAR(32)),/!0CHAR(58,97,110,121,58)),/!0NULL,/!0NULL#/!0AND &lsquo;QDWa&rsquo;=&lsquo;QDWa&rdquo; ifnull2ifisnull.py Replaces instances like &lsquo;IFNULL(A, B)&rsquo; with &lsquo;IF(ISNULL(A), B, A)&rsquo; &lsquo;IF(ISNULL(1),2,1)&rsquo; modsecurityversioned.py Embraces complete query with versioned comment &lsquo;1 /!30874AND 2&gt;1/&ndash;&rsquo; modsecurityzeroversioned.py Embraces complete query with zero-versioned comment &lsquo;1 /!00000AND 2&gt;1/&ndash;&rsquo; multiplespaces.py Adds multiple spaces around SQL keywords &lsquo;1 UNION SELECT foobar&rsquo; nonrecursivereplacement.py Replaces predefined SQL keywords with representations suitable for replacement (e.g.  <a href="/2015/05/sqlmap-tamper-scripts.html">Read More...</a>
+  </section>
+</article>
+
+  
+    
+<article class="list-item" itemscope itemtype="http://schema.org/Blog">
+  <h2 class="headline" itemprop="headline"><a href="/2015/05/sqlmap-tool.html">Data Protection Flash Cards</a></h2>
+  <div class="meta">
+
+    <span class="key">published on</span>
+    <span class="val"><time itemprop="datePublished" datetime="2015-05-07">May 07, 2015</time></span>
+
+  </div>
+  <section class="summary">
+    Over at Designing for Privacy they&rsquo;ve come up with a fantastic new way of raising data protection issues in the design process. They&rsquo;ve come up with a set of flash cards which are split into four categories (constraints / regulation / system / users) which can be used to conceptualize the legal, moral and ethical responsibilities of parties during the design process. To take a look head on over to www.designingforprivacy.co.uk where you can also find the downloadable versions to print. 
+  </section>
+</article>
+
+  
+</main>
+
+</div>
+
+<footer>
+  <div class="container">
+    <span class="copyright">&copy; 2016  #forkbombers - <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
+
